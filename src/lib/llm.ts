@@ -44,15 +44,14 @@ Search: ${JSON.stringify(text)}`;
       },
     });
     const output = JSON.parse(response.text ?? "{}");
-    const filters: Record<string, unknown> = { semantic_query: text };
+    const valid: Record<string, unknown> = { semantic_query: text };
     for (const [key, schema] of Object.entries(fields)) {
       const result = schema.safeParse(output[key]);
-      if (result.success) filters[key] = result.data;
+      if (result.success) valid[key] = result.data;
     }
-    if (filters.min_price !== undefined && filters.max_price !== undefined && filters.min_price > filters.max_price) {
-      delete filters.min_price;
-    }
-    return filters as SearchFilters;
+    const filters = valid as SearchFilters;
+    if (filters.min_price && filters.max_price && filters.min_price > filters.max_price) delete filters.min_price;
+    return filters;
   } catch (err) {
     console.warn("query parsing failed, using raw text:", (err as Error).message);
     return { semantic_query: text };
