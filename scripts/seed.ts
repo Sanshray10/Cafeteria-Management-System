@@ -196,7 +196,9 @@ try {
           const done = reviews.get(name) ?? 0;
           if (random() > 0.5 || done >= (reviewCap[name] ?? Infinity)) continue;
           reviews.set(name, done + 1);
-          const rating = Math.min(5, Math.max(1, Math.round((ratingBase[name] ?? 4.1) + (random() - 0.5) * 2)));
+          const rating = !ratingBase[name] && random() < 0.08
+            ? between(1, 2)
+            : Math.min(5, Math.max(1, Math.round((ratingBase[name] ?? 4.1) + (random() - 0.5) * 2)));
           const pool = rating <= 3 && itemComments[name] ? itemComments[name] : ratingComments[rating];
           const comment = random() < 0.15 ? "" : pick(pool);
           const at = minutes(slot.starts_at, between(20, 240));
