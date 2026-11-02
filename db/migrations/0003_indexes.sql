@@ -1,0 +1,14 @@
+CREATE INDEX idx_sessions_user ON sessions (user_id);
+CREATE INDEX idx_wallet_txn_user ON wallet_transactions (user_id, created_at);
+CREATE INDEX idx_wallet_txn_order ON wallet_transactions (order_id);
+CREATE INDEX idx_menu_items_category ON menu_items (category_id);
+CREATE INDEX idx_price_history_item ON price_history (item_id, changed_at);
+CREATE INDEX idx_recipe_items_ingredient ON recipe_items (ingredient_id);
+CREATE INDEX idx_stock_movements_ingredient ON stock_movements (ingredient_id, created_at);
+CREATE INDEX idx_stock_movements_order ON stock_movements (order_id);
+CREATE UNIQUE INDEX idx_stock_alerts_one_open ON stock_alerts (ingredient_id) WHERE resolved_at IS NULL;
+CREATE INDEX idx_orders_user ON orders (user_id, created_at);
+CREATE INDEX idx_orders_slot_status ON orders (slot_id, status);
+CREATE INDEX idx_order_items_item ON order_items (item_id);
+CREATE INDEX idx_feedback_item ON feedback (item_id);
+CREATE INDEX idx_feedback_user ON feedback (user_id);
