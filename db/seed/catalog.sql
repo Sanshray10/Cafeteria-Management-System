@@ -1,0 +1,108 @@
+INSERT INTO categories (name) VALUES
+    ('Breakfast'), ('Meals'), ('Snacks'), ('Chinese'), ('Beverages'), ('Desserts');
+
+INSERT INTO ingredients (name, unit, reorder_level) VALUES
+    ('Rice', 'g', 4000),
+    ('Wheat Flour', 'g', 3000),
+    ('Dosa Batter', 'g', 3000),
+    ('Rava', 'g', 1500),
+    ('Poha Flakes', 'g', 1000),
+    ('Potato', 'g', 4000),
+    ('Onion', 'g', 3000),
+    ('Tomato', 'g', 2000),
+    ('Mixed Vegetables', 'g', 3000),
+    ('Paneer', 'g', 2000),
+    ('Chicken', 'g', 3000),
+    ('Egg', 'pcs', 30),
+    ('Dal', 'g', 2000),
+    ('Curd', 'g', 2000),
+    ('Milk', 'ml', 5000),
+    ('Coffee Powder', 'g', 300),
+    ('Tea Leaves', 'g', 200),
+    ('Sugar', 'g', 1500),
+    ('Cooking Oil', 'ml', 3000),
+    ('Butter', 'g', 500),
+    ('Bread Slice', 'pcs', 40),
+    ('Cheese', 'g', 500),
+    ('Noodles', 'g', 2000),
+    ('Chocolate', 'g', 500),
+    ('Ice Cream', 'ml', 2000),
+    ('Lemon', 'pcs', 20),
+    ('Mango Pulp', 'ml', 1000),
+    ('Khoya', 'g', 500),
+    ('Spices', 'g', 300);
+
+INSERT INTO menu_items (category_id, name, description, price, is_veg, tags, is_active)
+SELECT c.category_id, v.name, v.description, v.price, v.is_veg, v.tags, v.is_active
+FROM (VALUES
+    ('Breakfast', 'Masala Dosa', 'Crispy rice crepe filled with spiced potato, served with chutney and sambar', 50, true, '{south-indian,crispy}'::TEXT[], true),
+    ('Breakfast', 'Idli Vada', 'Two soft steamed idlis and a crunchy lentil vada with sambar', 40, true, '{south-indian,light}', true),
+    ('Breakfast', 'Poha', 'Flattened rice tempered with onion, peanuts and lemon', 30, true, '{light,quick}', true),
+    ('Breakfast', 'Upma', 'Semolina cooked with vegetables and mild spices', 30, true, '{light,south-indian}', true),
+    ('Breakfast', 'Aloo Paratha', 'Whole wheat flatbread stuffed with spiced potato, served with curd and butter', 45, true, '{filling,north-indian}', true),
+    ('Breakfast', 'Egg Omelette Toast', 'Masala omelette with buttered toast', 40, false, '{protein,quick}', true),
+    ('Meals', 'Veg Thali', 'Rice, dal, two vegetable curries, roti, curd and pickle', 90, true, '{filling,north-indian,combo}', true),
+    ('Meals', 'Paneer Butter Masala with Roti', 'Paneer cubes in a rich tomato butter gravy with two rotis', 110, true, '{rich,north-indian,creamy}', true),
+    ('Meals', 'Chicken Biryani', 'Fragrant basmati rice layered with spiced chicken, served with raita', 140, false, '{spicy,filling,rice}', true),
+    ('Meals', 'Curd Rice', 'Cool rice mixed with curd and tempered with mustard and curry leaves', 50, true, '{light,south-indian,mild}', true),
+    ('Meals', 'Dal Khichdi', 'Comforting rice and lentil porridge with ghee', 60, true, '{light,mild,comfort}', true),
+    ('Meals', 'Egg Curry Rice', 'Boiled eggs in onion tomato gravy with steamed rice', 80, false, '{spicy,protein,rice}', true),
+    ('Snacks', 'Samosa', 'Crisp pastry filled with spiced potato and peas', 15, true, '{fried,spicy,quick}', true),
+    ('Snacks', 'Veg Sandwich', 'Bread with cucumber, tomato, potato and green chutney', 40, true, '{quick,light}', true),
+    ('Snacks', 'Cheese Grilled Sandwich', 'Grilled sandwich loaded with cheese and vegetables', 60, true, '{cheesy,grilled}', true),
+    ('Snacks', 'French Fries', 'Salted crispy potato fries', 50, true, '{fried,crispy}', true),
+    ('Snacks', 'Paneer Roll', 'Spiced paneer tikka wrapped in a flaky paratha', 70, true, '{spicy,wrap,protein}', true),
+    ('Snacks', 'Chicken Roll', 'Spicy chicken tikka wrapped in a flaky paratha', 90, false, '{spicy,wrap,protein}', true),
+    ('Chinese', 'Veg Hakka Noodles', 'Stir-fried noodles with crunchy vegetables and soy sauce', 80, true, '{indo-chinese,stir-fry}', true),
+    ('Chinese', 'Chicken Fried Rice', 'Wok-tossed rice with chicken, egg and spring onion', 110, false, '{indo-chinese,rice}', true),
+    ('Chinese', 'Veg Manchurian', 'Vegetable balls in a tangy garlic soy gravy', 85, true, '{indo-chinese,spicy,tangy}', true),
+    ('Chinese', 'Chilli Paneer', 'Paneer tossed with peppers and onion in a spicy chilli sauce', 100, true, '{indo-chinese,spicy,protein}', true),
+    ('Beverages', 'Filter Coffee', 'Strong South Indian coffee with frothy milk', 20, true, '{hot,coffee}', true),
+    ('Beverages', 'Masala Chai', 'Milk tea brewed with ginger and cardamom', 15, true, '{hot,tea}', true),
+    ('Beverages', 'Cold Coffee', 'Chilled blended coffee with milk and ice cream', 50, true, '{cold,coffee,sweet}', true),
+    ('Beverages', 'Fresh Lime Soda', 'Sweet and salty lime soda', 30, true, '{cold,refreshing}', true),
+    ('Beverages', 'Mango Lassi', 'Thick yoghurt drink blended with mango', 45, true, '{cold,sweet}', true),
+    ('Desserts', 'Gulab Jamun', 'Two warm milk dumplings soaked in sugar syrup', 30, true, '{sweet,warm}', true),
+    ('Desserts', 'Chocolate Brownie', 'Fudgy chocolate brownie', 60, true, '{sweet,chocolate}', true),
+    ('Desserts', 'Ice Cream Sundae', 'Vanilla ice cream with chocolate sauce and nuts', 70, true, '{sweet,cold,chocolate}', true),
+    ('Snacks', 'Masala Corn Cup', 'Steamed sweet corn with butter and masala', 35, true, '{light,quick}', false)
+) AS v(category, name, description, price, is_veg, tags, is_active)
+JOIN categories c ON c.name = v.category;
+
+INSERT INTO recipe_items (item_id, ingredient_id, qty_per_serving)
+SELECT m.item_id, i.ingredient_id, r.qty
+FROM (VALUES
+    ('Masala Dosa', 'Dosa Batter', 150), ('Masala Dosa', 'Potato', 100), ('Masala Dosa', 'Onion', 30), ('Masala Dosa', 'Cooking Oil', 15),
+    ('Idli Vada', 'Dosa Batter', 150), ('Idli Vada', 'Dal', 40), ('Idli Vada', 'Cooking Oil', 20),
+    ('Poha', 'Poha Flakes', 80), ('Poha', 'Onion', 30), ('Poha', 'Lemon', 1), ('Poha', 'Cooking Oil', 10),
+    ('Upma', 'Rava', 80), ('Upma', 'Mixed Vegetables', 40), ('Upma', 'Cooking Oil', 10),
+    ('Aloo Paratha', 'Wheat Flour', 120), ('Aloo Paratha', 'Potato', 120), ('Aloo Paratha', 'Butter', 15), ('Aloo Paratha', 'Curd', 50),
+    ('Egg Omelette Toast', 'Egg', 2), ('Egg Omelette Toast', 'Bread Slice', 2), ('Egg Omelette Toast', 'Onion', 20), ('Egg Omelette Toast', 'Butter', 10),
+    ('Veg Thali', 'Rice', 150), ('Veg Thali', 'Dal', 60), ('Veg Thali', 'Mixed Vegetables', 150), ('Veg Thali', 'Wheat Flour', 60), ('Veg Thali', 'Curd', 50),
+    ('Paneer Butter Masala with Roti', 'Paneer', 120), ('Paneer Butter Masala with Roti', 'Tomato', 100), ('Paneer Butter Masala with Roti', 'Butter', 20), ('Paneer Butter Masala with Roti', 'Wheat Flour', 80),
+    ('Chicken Biryani', 'Rice', 200), ('Chicken Biryani', 'Chicken', 180), ('Chicken Biryani', 'Onion', 50), ('Chicken Biryani', 'Spices', 10), ('Chicken Biryani', 'Curd', 50),
+    ('Curd Rice', 'Rice', 150), ('Curd Rice', 'Curd', 150),
+    ('Dal Khichdi', 'Rice', 100), ('Dal Khichdi', 'Dal', 80), ('Dal Khichdi', 'Butter', 10),
+    ('Egg Curry Rice', 'Egg', 2), ('Egg Curry Rice', 'Rice', 150), ('Egg Curry Rice', 'Onion', 50), ('Egg Curry Rice', 'Tomato', 50), ('Egg Curry Rice', 'Spices', 5),
+    ('Samosa', 'Wheat Flour', 40), ('Samosa', 'Potato', 60), ('Samosa', 'Cooking Oil', 20),
+    ('Veg Sandwich', 'Bread Slice', 2), ('Veg Sandwich', 'Potato', 50), ('Veg Sandwich', 'Tomato', 30), ('Veg Sandwich', 'Butter', 10),
+    ('Cheese Grilled Sandwich', 'Bread Slice', 2), ('Cheese Grilled Sandwich', 'Cheese', 40), ('Cheese Grilled Sandwich', 'Mixed Vegetables', 40), ('Cheese Grilled Sandwich', 'Butter', 10),
+    ('French Fries', 'Potato', 200), ('French Fries', 'Cooking Oil', 40),
+    ('Paneer Roll', 'Paneer', 80), ('Paneer Roll', 'Wheat Flour', 80), ('Paneer Roll', 'Onion', 30), ('Paneer Roll', 'Spices', 5),
+    ('Chicken Roll', 'Chicken', 100), ('Chicken Roll', 'Wheat Flour', 80), ('Chicken Roll', 'Onion', 30), ('Chicken Roll', 'Spices', 5),
+    ('Veg Hakka Noodles', 'Noodles', 150), ('Veg Hakka Noodles', 'Mixed Vegetables', 80), ('Veg Hakka Noodles', 'Cooking Oil', 20),
+    ('Chicken Fried Rice', 'Rice', 180), ('Chicken Fried Rice', 'Chicken', 80), ('Chicken Fried Rice', 'Egg', 1), ('Chicken Fried Rice', 'Cooking Oil', 20),
+    ('Veg Manchurian', 'Mixed Vegetables', 150), ('Veg Manchurian', 'Wheat Flour', 30), ('Veg Manchurian', 'Cooking Oil', 30),
+    ('Chilli Paneer', 'Paneer', 120), ('Chilli Paneer', 'Onion', 50), ('Chilli Paneer', 'Cooking Oil', 20), ('Chilli Paneer', 'Spices', 5),
+    ('Filter Coffee', 'Coffee Powder', 10), ('Filter Coffee', 'Milk', 100), ('Filter Coffee', 'Sugar', 10),
+    ('Masala Chai', 'Tea Leaves', 5), ('Masala Chai', 'Milk', 100), ('Masala Chai', 'Sugar', 10), ('Masala Chai', 'Spices', 2),
+    ('Cold Coffee', 'Coffee Powder', 10), ('Cold Coffee', 'Milk', 200), ('Cold Coffee', 'Ice Cream', 50), ('Cold Coffee', 'Sugar', 20),
+    ('Fresh Lime Soda', 'Lemon', 1), ('Fresh Lime Soda', 'Sugar', 20),
+    ('Mango Lassi', 'Curd', 150), ('Mango Lassi', 'Mango Pulp', 80), ('Mango Lassi', 'Sugar', 15),
+    ('Gulab Jamun', 'Khoya', 50), ('Gulab Jamun', 'Sugar', 40), ('Gulab Jamun', 'Cooking Oil', 15),
+    ('Chocolate Brownie', 'Chocolate', 40), ('Chocolate Brownie', 'Wheat Flour', 30), ('Chocolate Brownie', 'Butter', 20), ('Chocolate Brownie', 'Sugar', 25),
+    ('Ice Cream Sundae', 'Ice Cream', 150), ('Ice Cream Sundae', 'Chocolate', 20),
+    ('Masala Corn Cup', 'Mixed Vegetables', 100), ('Masala Corn Cup', 'Butter', 10)
+) AS r(item, ingredient, qty)
+JOIN menu_items m ON m.name = r.item
+JOIN ingredients i ON i.name = r.ingredient;
