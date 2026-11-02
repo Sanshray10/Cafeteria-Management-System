@@ -24,7 +24,7 @@ export async function GET(request: Request) {
          FROM feedback f
          WHERE f.embedding IS NOT NULL AND f.feedback_id <> $2
          ORDER BY f.embedding <=> $1
-         LIMIT 50
+         LIMIT 200
        )
        SELECT n.comment, COUNT(*)::int AS times, ROUND(AVG(n.rating), 1)::float AS avg_rating,
               string_agg(DISTINCT m.name, ', ') AS items, ROUND(MIN(n.distance)::numeric, 3)::float AS distance
