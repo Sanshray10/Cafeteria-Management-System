@@ -43,6 +43,21 @@ Stack: Next.js (App Router, TypeScript, Tailwind), PostgreSQL 16 with pgvector, 
    npm run db:migrate
    ```
 
+5. Load demo data and compute embeddings. The seed **deletes all existing data** first. The first embedding run downloads the `Xenova/all-MiniLM-L6-v2` model (about 25 MB).
+
+   ```bash
+   npm run db:seed
+   npm run db:embed
+   ```
+
+   Every seeded account uses the password `password123`:
+
+   | Role | Email |
+   | --- | --- |
+   | Admin | `admin@campus.edu` |
+   | Staff | `staff1@campus.edu`, `staff2@campus.edu` |
+   | Student | `aarav.sharma@campus.edu`, `diya.patel@campus.edu`, … |
+
 ## Run
 
 ```bash
@@ -54,6 +69,7 @@ Open http://localhost:3000.
 ## Project layout
 
 - `db/migrations/` – SQL migrations, applied in filename order and tracked in `schema_migrations`
-- `scripts/` – migration and data scripts
+- `db/seed/` – menu, ingredient and recipe data used by the seed script
+- `scripts/` – migration, seed and embedding backfill scripts
 - `src/app/` – pages and API route handlers (`src/app/api/`)
-- `src/lib/` – shared server code (database pool)
+- `src/lib/` – shared server code (database pool, embeddings, Gemini query parsing, search)
