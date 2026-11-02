@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "node --env-file=.env.local scripts/migrate.ts",
-    "db:seed": "node --env-file=.env.local scripts/seed.ts"
+    "db:seed": "node --env-file=.env.local scripts/seed.ts",
+    "db:embed": "node --env-file=.env.local scripts/embed-backfill.ts"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
