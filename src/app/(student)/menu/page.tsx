@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import AddToCartButton from "@/components/AddToCartButton";
 
 type Item = {
   item_id: number;
@@ -77,7 +78,7 @@ export default function MenuPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-8">
+    <div>
       <h1 className="text-2xl font-semibold">Menu</h1>
 
       <form
@@ -191,7 +192,7 @@ export default function MenuPage() {
           .filter((c) => items.some((i) => i.category === c))
           .map((c) => <Section key={c} title={c} items={items.filter((i) => i.category === c)} empty="" />)
       )}
-    </main>
+    </div>
   );
 }
 
@@ -242,6 +243,9 @@ function ItemCard({ item }: { item: Item }) {
           {item.review_count > 0 ? `★ ${item.avg_rating?.toFixed(1)} (${item.review_count})` : "No reviews yet"}
         </span>
         {soldOut ? <span className="font-medium text-red-700">Sold out</span> : <span className="text-stone-500">{item.category}</span>}
+      </div>
+      <div className="mt-3">
+        <AddToCartButton item={item} />
       </div>
     </div>
   );
